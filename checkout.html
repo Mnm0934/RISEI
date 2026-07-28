@@ -255,7 +255,7 @@ required
 
 <div class="form-group">
 <label>サイズ</label>
-<select name="size" required>
+<select id="size" name="entry.XXXXXXXXX" required>
 <option>S</option>
 <option>M</option>
 <option>L</option>
@@ -267,6 +267,7 @@ required
 <div class="form-group">
 <label>数量</label>
 <input
+id="qty"
 type="number"
 name="entry.123456789"
 min="1"
@@ -330,6 +331,23 @@ margin-bottom:20px;
 </p>
 
 </footer>
+
+<script>
+
+const cartData =
+JSON.parse(localStorage.getItem("riseiCart"));
+
+if(cartData){
+
+    document.getElementById("size").value =
+    cartData.size;
+
+    document.getElementById("qty").value =
+    cartData.quantity;
+
+}
+
+</script>
 
 </body>
 </html>
