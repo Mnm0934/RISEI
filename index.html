@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>履正社高校硬式野球部グッズ特設サイト</title>
+
+<style>
+
+:root{
+    --main:#00b7c7;
+    --sub:#0098a8;
+    --navy:#003a63;
+    --white:#ffffff;
+    --gray:#f5f7fa;
+    --text:#222;
+}
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    font-family:'Noto Sans JP',sans-serif;
+    color:var(--text);
+    background:#fff;
+    line-height:1.7;
+}
+
+a{
+    text-decoration:none;
+}
+
+img{
+    max-width:100%;
+    display:block;
+}
+
+.container{
+    width:90%;
+    max-width:1200px;
+    margin:auto;
+}
+
+/* ===== HEADER ===== */
+
+header{
+    position:fixed;
+    top:0;
+    width:100%;
+    background:rgba(255,255,255,0.95);
+    backdrop-filter:blur(10px);
+    z-index:999;
+    box-shadow:0 2px 15px rgba(0,0,0,0.08);
+}
+
+.header-inner{
+    height:80px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.logo{
+    font-size:1.4rem;
+    font-weight:900;
+    color:var(--navy);
+}
+
+nav ul{
+    display:flex;
+    list-style:none;
+    gap:25px;
+}
+
+nav a{
+    color:#333;
+    font-weight:600;
+}
+
+.cart-btn{
+    background:var(--main);
+    color:#fff;
+    padding:10px 20px;
+    border-radius:30px;
+}
+
+/* ===== HERO ===== */
+
+.hero{
+    margin-top:80px;
+    min-height:90vh;
+    background:
+    linear-gradient(
+        rgba(0,58,99,.55),
+        rgba(0,183,199,.55)
+    ),
+    url("01.jpeg");
+
+    background-size:cover;
+    background-position:center;
+    display:flex;
+    align-items:center;
+    text-align:center;
+    color:white;
+}
+
+.hero-content{
+    width:100%;
+}
+
+.hero h1{
+    font-size:4rem;
+    margin-bottom:20px;
+}
+
+.hero p{
+    font-size:1.2rem;
+    margin-bottom:40px;
+}
+
+.hero-buttons{
+    display:flex;
+    justify-content:center;
+    gap:15px;
+    flex-wrap:wrap;
+}
+
+.btn{
+    padding:15px 35px;
+    border-radius:50px;
+    font-weight:bold;
+    transition:0.3s;
+}
+
+.btn-main{
+    background:#fff;
+    color:var(--main);
+}
+
+.btn-sub{
+    border:2px solid #fff;
+    color:#fff;
+}
+
+.btn:hover{
+    transform:translateY(-4px);
+}
+
+/* ===== NEWS ===== */
+
+.section{
+    padding:90px 0;
+}
+
+.section-title{
+    text-align:center;
+    margin-bottom:50px;
+}
+
+.section-title h2{
+    color:var(--navy);
+    font-size:2.3rem;
+}
+
+.news-list{
+    display:grid;
+    gap:20px;
+}
+
+.news-item{
+    border-left:5px solid var(--main);
+    background:#fff;
+    padding:20px;
+    box-shadow:0 5px 15px rgba(0,0,0,.05);
+}
+
+/* ===== PRODUCTS ===== */
+
+.products{
+    background:var(--gray);
+}
+
+.product-grid{
+    display:flex;
+    justify-content:center;
+    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+    gap:30px;
+}
+
+.card{
+    background:white;
+    border-radius:20px;
+    overflow:hidden;
+    transition:.3s;
+    box-shadow:0 8px 25px rgba(0,0,0,.08);
+}
+
+.card:hover{
+    transform:translateY(-8px);
+}
+
+.card img{
+    height:250px;
+    object-fit:cover;
+}
+
+.card-content{
+    padding:20px;
+}
+
+.price{
+    color:var(--main);
+    font-size:1.5rem;
+    font-weight:bold;
+    margin:15px 0;
+}
+
+.buy{
+    display:block;
+    text-align:center;
+    background:var(--main);
+    color:#fff;
+    padding:12px;
+    border-radius:30px;
+}
+
+/* ===== ABOUT ===== */
+
+.about-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:40px;
+    align-items:center;
+}
+
+.about img{
+    width:100%;
+    max-width:500px;
+    height:auto;
+    border-radius:20px;
+    box-shadow:0 8px 25px rgba(0,0,0,.15);
+}
+
+/* ===== CTA ===== */
+
+.cta{
+    background:linear-gradient(
+    135deg,
+    var(--navy),
+    var(--main)
+    );
+
+    color:#fff;
+    text-align:center;
+}
+
+.cta h2{
+    margin-bottom:20px;
+}
+
+.cta a{
+    display:inline-block;
+    background:#fff;
+    color:var(--main);
+    padding:15px 40px;
+    border-radius:40px;
+    font-weight:bold;
+}
+
+/* ===== FOOTER ===== */
+
+footer{
+    background:#061826;
+    color:#fff;
+    text-align:center;
+    padding:40px 20px;
+}
+
+footer a{
+    color:#fff;
+}
+
+/* ===== MOBILE ===== */
+
+@media(max-width:768px){
+
+.hero h1{
+    font-size:2.3rem;
+}
+
+nav{
+    display:none;
+}
+
+.about-grid{
+    grid-template-columns:1fr;
+}
+
+.section{
+    padding:70px 0;
+}
+}
+
+.logo span{
+    display:block;
+    font-size:12px;
+    letter-spacing:3px;
+    color:#00b7c7;
+}
+
+
+
+</style>
+</head>
+
+<body>
+
+<header>
+<div class="container header-inner">
+
+<div class="logo">
+履正社高校硬式野球部OB会
+<span>RISEI SHOP 特設サイト</span>
+</div>
+
+<nav>
+<ul>
+  <li><a href="products.html">商品一覧</a></li>
+  <li><a href="contact.html">お問い合わせ</a></li>
+  <li><a class="cart-btn" href="cart.html">🛒 カート</a></li>
+</ul>
+</nav>
+
+</div>
+</header>
+
+<section class="hero">
+
+<div class="container hero-content">
+
+<h1>
+履正社高校硬式野球部<br>
+甲子園出場記念特設<br>
+オリジナルTシャツ販売<br>
+</h1>
+
+<p>
+選手たちへの応援を形に。<br>
+公式応援グッズ販売中。
+</p>
+
+<div class="hero-buttons">
+    <a href="products.html" class="btn btn-main">
+        商品を見る
+    </a>
+
+    <a href="cart.html" class="btn btn-sub">
+        カートを見る
+    </a>
+</div>
+
+</div>
+
+</section>
+
+
+<section class="section products">
+
+<div class="container">
+
+<div class="section-title">
+<h2>人気グッズ</h2>
+</div>
+
+<div class="product-grid">
+
+<div class="card">
+
+<img src="tshirt.jpeg" alt="履正社応援Tシャツ">
+
+<div class="card-content">
+
+<h3>履正社応援Tシャツ</h3>
+
+<div class="price">¥3,500</div>
+
+<a href="product-detail.html?id=1" class="buy">
+詳細を見る
+</a>
+
+</div>
+
+</div>
+</div>
+
+</div>
+
+</section>
+
+
+
+<section class="section cta">
+
+<div class="container">
+
+<h2>
+オンラインショップはこちら
+</h2>
+
+<p>
+応援グッズを購入して履正社高校硬式野球部を応援しよう！
+</p>
+
+<br>
+
+<a href="products.html">
+商品一覧へ
+</a>
+
+</div>
+
+</section>
+
+<footer>
+
+<p>
+© 2026 履正社高校硬式野球部甲子園出場記念Tシャツ販売特設サイト
+</p>
+
+<br>
+
+<p>
+<a href="contact.html">お問い合わせ</a>
+</p>
+
+</footer>
+
+</body>
+</html>
