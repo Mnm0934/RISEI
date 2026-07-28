@@ -175,6 +175,11 @@ margin-bottom:30px;
 
 </div>
 
+<iframe
+name="hidden_iframe"
+style="display:none;">
+</iframe>
+
 <form
 action="https://docs.google.com/forms/d/e/1FAIpQLScj1vmMtXvUfwpWAsZWUplBCTbBkNx_mDhT-YWEdYLFTi4LGg/formResponse"
 method="POST"
@@ -335,6 +340,19 @@ if(cartData){
     cartData.quantity;
 
 }
+
+document
+.getElementById("orderForm")
+.addEventListener("submit", function(){
+
+    setTimeout(function(){
+
+        window.location.href =
+        "thanks.html";
+
+    }, 1000);
+
+});
 
 </script>
 
