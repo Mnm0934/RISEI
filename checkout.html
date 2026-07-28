@@ -164,14 +164,11 @@ border-radius:10px;
 margin-bottom:30px;
 ">
 
-<h3>
-履正社高校硬式野球部OB会
-甲子園出場記念Tシャツ
-</h3>
+<h3>ご注文内容</h3>
 
-<p>
-価格：¥3,500
-</p>
+<div id="order-summary">
+
+</div>
 
 </div>
 
@@ -181,7 +178,7 @@ style="display:none;">
 </iframe>
 
 <form
-action="https://docs.google.com/forms/d/e/1FAIpQLScj1vmMtXvUfwpWAsZWUplBCTbBkNx_mDhT-YWEdYLFTi4LGg/formResponse"
+action="<a href="https://docs.google.com/forms/d/e/1FAIpQLScj1vmMtXvUfwpWAsZWUplBCTbBkNx_mDhT-YWEdYLFTi4LGg/formResponse"
 method="POST"
 target="_blank">
 
@@ -246,29 +243,11 @@ required
 >
 </div>
 
-
-<div class="form-group">
-<label>サイズ</label>
-<select id="size" name="entry.390255223" required>
-<option>S</option>
-<option>M</option>
-<option>L</option>
-<option>XL</option>
-<option>XXL</option>
-</select>
-</div>
-
-<div class="form-group">
-<label>数量</label>
 <input
-id="qty"
-type="number"
-name="entry.1382405050"
-min="1"
-value="1"
-required
->
-</div>
+type="hidden"
+id="orderData"
+name="entry.759961625">
+``
 
 <div class="form-group">
 
@@ -321,7 +300,12 @@ margin-bottom:20px;
 
 <p>
 © 2026 履正社高校硬式野球部OB会
-甲子園出場記念Tシャツ販売サイト
+<br>
+甲子園出場記念Tシャツ販売特設サイト
+</p>
+
+<p>
+<a href="index.html">TOPへ戻る</a>
 </p>
 
 </footer>
@@ -329,17 +313,61 @@ margin-bottom:20px;
 <script>
 
 const cartData =
-JSON.parse(localStorage.getItem("riseiCart"));
+JSON.parse(
+localStorage.getItem("riseiCart")
+) || [];
 
-if(cartData){
+let orderText = '';
 
-    document.getElementById("size").value =
-    cartData.size;
+let html = '';
 
-    document.getElementById("qty").value =
-    cartData.quantity;
+let total = 0;
 
-}
+cartData.forEach(item => {
+
+    const subtotal =
+    item.price * item.quantity;
+
+    total += subtotal;
+
+    html += `
+    <p>
+
+    ${item.product}<br>
+
+    サイズ：${item.size}<br>
+
+    数量：${item.quantity}<br>
+
+    小計：¥${subtotal.toLocaleString()}
+
+    </p>
+
+    <hr>
+    `;
+
+    orderText +=
+`${item.product}
+サイズ:${item.size}
+数量:${item.quantity}
+
+`;
+
+});
+
+html += `
+<h3>
+合計金額：¥${total.toLocaleString()}
+</h3>
+`;
+
+document.getElementById(
+    "order-summary"
+).innerHTML = html;
+
+document.getElementById(
+    "orderData"
+).value = orderText;
 
 document
 .getElementById("orderForm")

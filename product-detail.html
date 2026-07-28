@@ -279,12 +279,7 @@ placeholder="備考があれば入力"
 
 </section>
 
-<footer>
 
-<p>
-© 2026 履正社高校硬式野球部OB会
-甲子園出場記念Tシャツ販売サイト
-</p>
 
 <script>
 
@@ -311,23 +306,36 @@ document
 
     const cartData = {
 
-        product:
-        "履正社高校硬式野球部OB会 甲子園出場記念Tシャツ",
+    id:
+"tshirt001-" +
+size +
+"-" +
+Date.now(),
 
-        price:3500,
+    product:
+    "履正社高校硬式野球部OB会 甲子園出場記念Tシャツ",
 
-        size:size,
+    price:3500,
 
-        quantity:Number(quantity),
+    image:"tshirt.jpeg",
 
-        remark:remark
+    size:size,
 
-    };
+    quantity:Number(quantity),
 
-    localStorage.setItem(
-        "riseiCart",
-        JSON.stringify(cartData)
-    );
+    remark:remark
+
+};
+
+    let cart =
+JSON.parse(localStorage.getItem("riseiCart")) || [];
+
+cart.push(cartData);
+
+localStorage.setItem(
+    "riseiCart",
+    JSON.stringify(cart)
+);
 
     location.href="cart.html";
 
@@ -335,7 +343,20 @@ document
 
 </script>
 
+<footer>
+
+<p>
+© 2026 履正社高校硬式野球部OB会
+<br>
+甲子園出場記念Tシャツ販売特設サイト
+</p>
+
+<p>
+<a href="index.html">TOPへ戻る</a>
+</p>
+
 </footer>
+
 
 </body>
 </html>

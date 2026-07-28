@@ -172,6 +172,8 @@ footer{
 商品へ戻る
 </a>
 
+<div id="cart-count"></div>
+
 </div>
 
 </header>
@@ -194,20 +196,36 @@ footer{
 
 <p>
 © 2026 履正社高校硬式野球部OB会
+<br>
+甲子園出場記念Tシャツ販売特設サイト
+</p>
+
+<p>
+<a href="index.html">TOPへ戻る</a>
 </p>
 
 </footer>
+
+
 
 <script>
 
 const cartData = JSON.parse(
 localStorage.getItem("riseiCart")
+) || [];
+
+const cartCount =
+cartData.reduce(
+    (sum,item)=>
+    sum + item.quantity,
+    0
 );
+
 
 const cartContainer =
 document.getElementById("cart-container");
 
-if(!cartData){
+if(cartData.length === 0){
 
 cartContainer.innerHTML = `
 
@@ -227,41 +245,90 @@ cartContainer.innerHTML = `
 
 }else{
 
-const total =
-3500 * cartData.quantity;
+let html = '';
+
+const total = cartData.reduce(
+    (sum,item) =>
+    sum + (item.price * item.quantity),
+    0
+);
+
+cartData.forEach(item => {
+
+html += `
+
+<div class="cart-item"
+data-id="${item.id}">
+
+<img src="${item.image}">
+
+
+<div class="item-info">
+
+<h2>
+${item.product}
+</h2>
+
+<div class="row">
+サイズ：${item.size}
+</div>
+
+<div class="row">
+
+<button
+onclick="changeQty('${item.id}',-1)">
+－
+</button>
+
+<span style="margin:0 10px;">
+${item.quantity}
+</span>
+
+<button
+onclick="changeQty('${item.id}',1)">
+＋
+</button>
+
+</div>
+
+<div class="row">
+
+<button
+onclick="removeItem('${item.id}')"
+style="
+background:#dc3545;
+color:#fff;
+border:none;
+padding:8px 15px;
+border-radius:6px;
+cursor:pointer;
+">
+
+削除
+
+</button>
+
+</div>
+
+<div class="price">
+¥${(item.price * item.quantity).toLocaleString()}
+</div>
+
+</div>
+
+</div>
+
+<hr style="margin:25px 0;">
+
+`;
+
+});
 
 cartContainer.innerHTML = `
 
 <div class="cart-area">
 
-<div class="cart-item">
-
-<img src="tshirt.jpeg" alt="甲子園出場記念Tシャツ">
-
-<div class="item-info">
-
-<h2>
-履正社高校硬式野球部OB会
-甲子園出場記念Tシャツ
-</h2>
-
-<div class="row">
-サイズ：
-${cartData.size}
-</div>
-
-<div class="row">
-数量：
-${cartData.quantity}
-</div>
-
-<div class="price">
-¥3,500
-</div>
-
-</div>
-
-</div>
+${html}
 
 <div class="total">
 
@@ -282,6 +349,63 @@ class="checkout-btn">
 `;
 
 }
+
+function removeItem(id){
+
+    let cart =
+    JSON.parse(
+        localStorage.getItem("riseiCart")
+    ) || [];
+
+    cart = cart.filter(
+        item => item.id !== id
+    );
+
+    localStorage.setItem(
+        "riseiCart",
+        JSON.stringify(cart)
+    );
+
+    location.reload();
+
+}
+
+function changeQty(id, amount){
+
+    let cart =
+    JSON.parse(
+        localStorage.getItem("riseiCart")
+    ) || [];
+
+    cart = cart.map(item => {
+
+        if(item.id === id){
+
+            item.quantity += amount;
+
+            if(item.quantity < 1){
+                item.quantity = 1;
+            }
+
+        }
+
+        return item;
+
+    });
+
+    localStorage.setItem(
+        "riseiCart",
+        JSON.stringify(cart)
+    );
+
+    location.reload();
+
+}
+
+document
+.getElementById("cart-count")
+.innerHTML =
+`🛒 ${cartCount}点`;
 
 </script>
 

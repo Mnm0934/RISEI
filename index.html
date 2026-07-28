@@ -102,7 +102,7 @@ nav a{
         rgba(0,58,99,.55),
         rgba(0,183,199,.55)
     ),
-    url("01.jpeg");
+    url("01.jpg");
 
     background-size:cover;
     background-position:center;
@@ -189,9 +189,9 @@ nav a{
 }
 
 .product-grid{
-    display:flex;
-    justify-content:center;
-    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+    display:grid;
+    grid-template-columns:
+    repeat(auto-fit,minmax(280px,1fr));
     gap:30px;
 }
 
@@ -334,7 +334,6 @@ nav{
 <nav>
 <ul>
   <li><a href="products.html">商品一覧</a></li>
-  <li><a href="contact.html">お問い合わせ</a></li>
   <li><a class="cart-btn" href="cart.html">🛒 カート</a></li>
 </ul>
 </nav>
@@ -382,9 +381,11 @@ nav{
 
 <div class="product-grid">
 
+<!-- 商品1 -->
 <div class="card">
 
-<img src="tshirt.jpeg" alt="履正社応援Tシャツ">
+<img src="tshirt.jpeg"
+alt="履正社応援Tシャツ">
 
 <div class="card-content">
 
@@ -392,13 +393,63 @@ nav{
 
 <div class="price">¥3,500</div>
 
-<a href="product-detail.html?id=1" class="buy">
+<a href="product-detail.html"
+class="buy">
+
 詳細を見る
+
 </a>
 
 </div>
 
 </div>
+
+<!-- 商品2 -->
+<div class="card">
+
+<img src="tshirt.jpeg"
+alt="履正社応援Tシャツ">
+
+<div class="card-content">
+
+<h3>優勝記念Tシャツ</h3>
+
+<div class="price">¥4,000</div>
+
+<a href="product-detail-2.html"
+class="buy">
+
+詳細を見る
+
+</a>
+
+</div>
+
+</div>
+
+<!-- 商品3 -->
+<div class="card">
+
+<img src="tshirt.jpeg"
+alt="履正社応援Tシャツ">
+
+<div class="card-content">
+
+<h3>優勝記念Tシャツ</h3>
+
+<div class="price">¥4,000</div>
+
+<a href="product-detail-3.html"
+class="buy">
+
+詳細を見る
+
+</a>
+
+</div>
+
+</div>
+
 </div>
 
 </div>
@@ -432,13 +483,9 @@ nav{
 <footer>
 
 <p>
-© 2026 履正社高校硬式野球部甲子園出場記念Tシャツ販売特設サイト
-</p>
-
+© 2026 履正社高校硬式野球部OB会
 <br>
-
-<p>
-<a href="contact.html">お問い合わせ</a>
+甲子園出場記念Tシャツ販売特設サイト
 </p>
 
 </footer>
