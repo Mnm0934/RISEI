@@ -205,27 +205,87 @@ footer{
 
 </section>
 
-<div class="container">
+<section class="container">
 
-<div id="cart-container">
+<div id="cart-container"></div>
 
-</div>
+</section>
 
-</div>
+<section
+style="
+background:#f5f7fa;
+padding:40px 20px;
+text-align:center;
+border-top:1px solid #ddd;
+">
+
+<h3
+style="
+color:#003a63;
+margin-bottom:15px;
+">
+ショップ情報
+</h3>
+
+<p>
+
+<strong>RISEI SHOP</strong><br>
+
+履正社高等学校硬式野球部OB会<br>
+
+甲子園出場記念Tシャツ販売特設サイト
+
+</p>
+
+<br>
+
+<p
+style="
+font-size:14px;
+color:#666;
+">
+
+※本企画・サイト運営は<br>
+Keep the Faith Apparel によるプロデュースです。
+
+</p>
+
+<br>
+
+<p
+style="
+font-size:14px;
+color:#333;
+margin-top:10px;
+">
+
+<strong>お問い合わせ先</strong><br>
+Keep The Faith<br>
+電話番号：070-8341-8056<br>
+メールアドレス：<a href="mailto:ktf358@gmail.com">ktf358@gmail.com</a>
+
+</p>
+
+</section>
 
 <footer>
 
 <p>
-© 2026 履正社高校硬式野球部OB会
+© 2026 RISEI SHOP
+<br>
+履正社高等学校硬式野球部OB会
 <br>
 甲子園出場記念Tシャツ販売特設サイト
 </p>
 
-<p>
-<a href="index.html">TOPへ戻る</a>
+<br>
+
+<p style="font-size:12px;opacity:.8;">
+企画・運営：Keep the Faith Apparel
 </p>
 
 </footer>
+
 
 
 
@@ -291,7 +351,15 @@ ${item.product}
 </h2>
 
 <div class="row">
+カラー：${item.color}
+</div>
+
+<div class="row">
 サイズ：${item.size}
+</div>
+
+<div class="row">
+数量：${item.quantity}
 </div>
 
 <div class="row">
@@ -332,7 +400,7 @@ cursor:pointer;
 </div>
 
 <div class="price">
-¥${(item.price * item.quantity).toLocaleString()}
+¥${(item.price * item.quantity).toLocaleString()}（税込）
 </div>
 
 </div>
@@ -351,9 +419,27 @@ cartContainer.innerHTML = `
 
 ${html}
 
+<div style="
+margin-top:30px;
+padding:15px;
+background:#fff8e1;
+border:1px solid #ffd54f;
+border-radius:10px;
+">
+
+送料は購入手続き時に加算されます。<br>
+
+近畿地方：¥1,000（税込）<br>
+
+近畿地方以外：¥1,500（税込）
+
+</div>
+
+
 <div class="total">
 
-合計金額
+合計金額（税込）
+
 ¥${total.toLocaleString()}
 
 </div>

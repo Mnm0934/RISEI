@@ -261,6 +261,24 @@ required
 >
 </div>
 
+<div class="form-group">
+
+<label>配送地域</label>
+
+<select id="shippingRegion" required>
+
+<option value="1000">
+近畿地方
+</option>
+
+<option value="1500">
+近畿地方以外
+</option>
+
+</select>
+
+</div>
+
 <input
 type="hidden"
 id="orderData"
@@ -271,13 +289,24 @@ name="entry.759961625">
 
 <label>お支払い方法</label>
 
+<select name="entry.1932035601">
+
+<option>銀行振込</option>
+<option>PayPay</option>
+
+</select>
+</div>
+
+
+<div class="form-group">
+<label>振込名義（カタカナ）</label>
 <input
 type="text"
-value="銀行振込のみ"
-readonly
->
-
+name="entry.1708757904"
+placeholder="リセイシャ タロウ"
+required>
 </div>
+
 
 
 <div class="form-group">
@@ -295,9 +324,26 @@ border-radius:10px;
 margin-bottom:20px;
 ">
 
+<strong>送料について</strong><br>
+
+近畿地方：¥1,000（税込）<br>
+
+近畿地方以外：¥1,500（税込）
+
+</div>
+
+<div style="
+background:#fff8e1;
+border:1px solid #ffd54f;
+padding:15px;
+border-radius:10px;
+margin-bottom:20px;
+">
+
 <strong>お支払いについて</strong><br>
 
-ご注文後、運営より振込先をご案内いたします。<br>
+ご注文後、自動返信メールをご確認ください。<br>
+お支払い方法に応じたお支払い情報を記載しております。<br>
 入金確認後に商品の発送手続きを行います。
 
 </div>
@@ -314,20 +360,80 @@ margin-bottom:20px;
 
 </section>
 
+<section
+style="
+background:#f5f7fa;
+padding:40px 20px;
+text-align:center;
+border-top:1px solid #ddd;
+">
+
+<h3
+style="
+color:#003a63;
+margin-bottom:15px;
+">
+ショップ情報
+</h3>
+
+<p>
+
+<strong>RISEI SHOP</strong><br>
+
+履正社高等学校硬式野球部OB会<br>
+
+甲子園出場記念Tシャツ販売特設サイト
+
+</p>
+
+<br>
+
+<p
+style="
+font-size:14px;
+color:#666;
+">
+
+※本企画・サイト運営は<br>
+Keep the Faith Apparel によるプロデュースです。
+
+</p>
+
+<br>
+
+<p
+style="
+font-size:14px;
+color:#333;
+margin-top:10px;
+">
+
+<strong>お問い合わせ先</strong><br>
+Keep The Faith<br>
+電話番号：070-8341-8056<br>
+メールアドレス：<a href="mailto:ktf358@gmail.com">ktf358@gmail.com</a>
+
+</p>
+
+</section>
+
 <footer>
 
 <p>
-© 2026 履正社高校硬式野球部OB会
+© 2026 RISEI SHOP
+<br>
+履正社高等学校硬式野球部OB会
 <br>
 甲子園出場記念Tシャツ販売特設サイト
 </p>
 
-<p>
-<a href="index.html">TOPへ戻る</a>
+<br>
+
+<p style="font-size:12px;opacity:.8;">
+企画・運営：Keep the Faith Apparel
 </p>
 
 </footer>
-
 <script>
 
 const cartData =
@@ -335,11 +441,21 @@ JSON.parse(
 localStorage.getItem("riseiCart")
 ) || [];
 
+if(cartData.length === 0){
+
+    alert("カートが空です");
+
+    location.href = "products.html";
+
+}
+
 let orderText = '';
 
 let html = '';
 
 let total = 0;
+let shipping = 1000;
+
 
 cartData.forEach(item => {
 
@@ -353,9 +469,13 @@ cartData.forEach(item => {
 
     ${item.product}<br>
 
-    サイズ：${item.size}<br>
+    カラー：${item.color}<br>
+
+サイズ：${item.size}<br>
 
     数量：${item.quantity}<br>
+
+備考：${item.remark || "なし"}<br>
 
     小計：¥${subtotal.toLocaleString()}
 
@@ -366,26 +486,60 @@ cartData.forEach(item => {
 
     orderText +=
 `${item.product}
+カラー:${item.color}
 サイズ:${item.size}
 数量:${item.quantity}
+小計:${subtotal.toLocaleString()}円
+備考:${item.remark || "なし"}
 
 `;
 
 });
 
 html += `
+<div id="total-area">
+
 <h3>
-合計金額：¥${total.toLocaleString()}
+商品合計：¥${total.toLocaleString()}
 </h3>
+
+<h3>
+送料：¥1,000
+</h3>
+
+<h2 style="
+color:#003a63;
+margin-top:10px;
+">
+総合計：¥${(total + 1000).toLocaleString()}
+</h2>
+
+</div>
 `;
 
 document.getElementById(
     "order-summary"
 ).innerHTML = html;
 
-document.getElementById(
-    "orderData"
-).value = orderText;
+function updateOrderData(){
+
+const region =
+document.getElementById("shippingRegion")
+.options[
+document.getElementById("shippingRegion")
+.selectedIndex
+].text;
+
+document.getElementById("orderData").value =
+orderText +
+
+`
+配送地域：${region}
+送料：${shipping.toLocaleString()}円
+総合計：${(total + shipping).toLocaleString()}円
+`;
+
+}
 
 document
 .getElementById("orderForm")
@@ -393,12 +547,47 @@ document
 
     setTimeout(function(){
 
+        localStorage.removeItem("riseiCart");
+
         window.location.href =
         "thanks.html";
 
     }, 1000);
 
 });
+
+document
+.getElementById("shippingRegion")
+.addEventListener("change", function(){
+
+shipping = Number(this.value);
+
+document
+.getElementById("total-area")
+.innerHTML = `
+
+<h3>
+商品合計：¥${total.toLocaleString()}
+</h3>
+
+<h3>
+送料：¥${shipping.toLocaleString()}
+</h3>
+
+<h2 style="
+color:#003a63;
+margin-top:10px;
+">
+総合計：¥${(total + shipping).toLocaleString()}
+</h2>
+
+`;
+
+updateOrderData();
+
+});
+
+updateOrderData();
 
 </script>
 
