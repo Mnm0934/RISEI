@@ -538,19 +538,21 @@ orderText +
 `;
 
 }
+// 送料変更などの処理
+updateOrderData();
 
-document
-.getElementById("orderForm")
-.addEventListener("submit", function(){
+// ★ここに新しい submit 処理を入れる
+document.getElementById("orderForm").addEventListener("submit", function(e){
+
+    e.preventDefault(); // ←追加するとより安全
+
+    document.querySelector(".submit-btn").disabled = true;
+
+    localStorage.removeItem("riseiCart");
 
     setTimeout(function(){
-
-        localStorage.removeItem("riseiCart");
-
-        window.location.href =
-        "thanks.html";
-
-    }, 1000);
+        window.location.href = "thanks.html";
+    }, 800);
 
 });
 
