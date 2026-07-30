@@ -283,13 +283,16 @@ required
 配送地域
 <span style="color:#e60026;">※必須</span>
 </label>
-<select id="shippingRegion" required>
+<select
+id="shippingRegion"
+name="entry.1623684809"
+required>
 
-<option value="1000">
+<option value="近畿地方">
 近畿地方
 </option>
 
-<option value="1500">
+<option value="近畿地方以外">
 近畿地方以外
 </option>
 
@@ -576,7 +579,11 @@ document
 .getElementById("shippingRegion")
 .addEventListener("change", function(){
 
-shipping = Number(this.value);
+if(this.value === "近畿地方"){
+    shipping = 1000;
+}else{
+    shipping = 1500;
+}
 
 document
 .getElementById("total-area")
