@@ -528,10 +528,39 @@ quantity:Number(quantity),
 
 };
 
-    let cart =
-JSON.parse(localStorage.getItem("riseiCart")) || [];
+    let cart = [];
 
-cart.push(cartData);
+try {
+
+    cart = JSON.parse(
+        localStorage.getItem("riseiCart")
+    ) || [];
+
+    if (!Array.isArray(cart)) {
+        cart = [];
+    }
+
+} catch(error){
+
+    cart = [];
+
+}
+
+let existingItem = cart.find(item =>
+    item.product === cartData.product &&
+    item.size === cartData.size &&
+    item.color === cartData.color
+);
+
+if(existingItem){
+
+    existingItem.quantity += Number(quantity);
+
+}else{
+
+    cart.push(cartData);
+
+}
 
 localStorage.setItem(
     "riseiCart",

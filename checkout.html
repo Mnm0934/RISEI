@@ -467,7 +467,31 @@ JSON.parse(
 localStorage.getItem("riseiCart")
 ) || [];
 
-if(cartData.length === 0){
+const mergedCart = [];
+
+cartData.forEach(item => {
+
+    const existing = mergedCart.find(m =>
+        m.product === item.product &&
+        m.size === item.size &&
+        m.color === item.color
+    );
+
+    if(existing){
+
+        existing.quantity += item.quantity;
+
+    }else{
+
+        mergedCart.push({
+            ...item
+        });
+
+    }
+
+});
+
+if(mergedCart.length === 0){
 
     alert("カートが空です");
 
@@ -483,7 +507,7 @@ let total = 0;
 let shipping = 1000;
 
 
-cartData.forEach(item => {
+mergedCart.forEach(item => {
 
     const subtotal =
     item.price * item.quantity;
@@ -491,24 +515,22 @@ cartData.forEach(item => {
     total += subtotal;
 
     html += `
-    <p>
+<p>
 
-    ${item.product}<br>
+${item.product}<br>
 
-    カラー：${item.color}<br>
+カラー：${item.color}<br>
 
 サイズ：${item.size}<br>
 
-    数量：${item.quantity}<br>
+数量：${item.quantity}<br>
 
-備考：${item.remark || "なし"}<br>
+小計：¥${subtotal.toLocaleString()}
 
-    小計：¥${subtotal.toLocaleString()}
+</p>
 
-    </p>
-
-    <hr>
-    `;
+<hr>
+`;
 
     orderText +=
 `${item.product}
@@ -516,7 +538,6 @@ cartData.forEach(item => {
 サイズ:${item.size}
 数量:${item.quantity}
 小計:${subtotal.toLocaleString()}円
-備考:${item.remark || "なし"}
 
 `;
 
@@ -575,11 +596,11 @@ updateOrderData();
 document.getElementById("orderForm")
 .addEventListener("submit", function(){
 
-    const fd = new FormData(this);
+    console.log("送信成功");
 
-    for (const pair of fd.entries()) {
-        console.log(pair[0] + " = " + pair[1]);
-    }
+    setTimeout(function(){
+        window.location.href = "thanks.html";
+    }, 3000);
 
 });
 
