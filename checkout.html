@@ -319,7 +319,7 @@ name="entry.882951761">
 <select name="entry.1932035601">
 
 <option>銀行振込</option>
-<option>PayPay</option>
+<option>Paypay</option>
 
 </select>
 </div>
@@ -575,9 +575,11 @@ updateOrderData();
 document.getElementById("orderForm")
 .addEventListener("submit", function(){
 
-    alert("submit実行");
+    const fd = new FormData(this);
 
-    console.log("送信開始");
+    for (const pair of fd.entries()) {
+        console.log(pair[0] + " = " + pair[1]);
+    }
 
 });
 
