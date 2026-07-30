@@ -201,7 +201,10 @@ style="display:none;">
   target="hidden_iframe">
 
 <div class="form-group">
-<label>お名前</label>
+<label>
+お名前
+<span style="color:red;">※必須</span>
+</label>
 <input
 type="text"
 name="entry.1579585681"
@@ -211,7 +214,10 @@ required
 </div>
 
 <div class="form-group">
-<label>フリガナ</label>
+<label>
+フリガナ
+<span style="color:#e60026;">※必須</span>
+</label>
 <input
 type="text"
 name="entry.954214947"
@@ -221,7 +227,10 @@ required
 </div>
 
 <div class="form-group">
-<label>メールアドレス</label>
+<label>
+メールアドレス
+<span style="color:#e60026;">※必須</span>
+</label>
 <input
 type="email"
 name="entry.731522066"
@@ -231,7 +240,9 @@ required
 </div>
 
 <div class="form-group">
-<label>電話番号</label>
+<label>電話番号
+<span style="color:#e60026;">※必須</span>
+</label>
 <input
 type="tel"
 name="entry.1827567744"
@@ -241,7 +252,10 @@ required
 </div>
 
 <div class="form-group">
-<label>郵便番号</label>
+<label>
+郵便番号
+<span style="color:#e60026;">※必須</span>
+</label>
 <input
 type="text"
 name="entry.742542028"
@@ -251,7 +265,10 @@ required
 </div>
 
 <div class="form-group">
-<label>住所</label>
+<label>
+住所
+<span style="color:#e60026;">※必須</span>
+</label>
 <input
 type="text"
 name="entry.145627215"
@@ -262,8 +279,10 @@ required
 
 <div class="form-group">
 
-<label>配送地域</label>
-
+<label>
+配送地域
+<span style="color:#e60026;">※必須</span>
+</label>
 <select id="shippingRegion" required>
 
 <option value="1000">
@@ -286,8 +305,10 @@ name="entry.759961625">
 
 <div class="form-group">
 
-<label>お支払い方法</label>
-
+<label>
+お支払い方法
+<span style="color:#e60026;">※必須</span>
+</label>
 <select name="entry.1932035601">
 
 <option>銀行振込</option>
@@ -542,17 +563,12 @@ orderText +
 updateOrderData();
 
 // ★ここに新しい submit 処理を入れる
-document.getElementById("orderForm").addEventListener("submit", function(e){
-
-    e.preventDefault(); // ←追加するとより安全
-
-    document.querySelector(".submit-btn").disabled = true;
-
-    localStorage.removeItem("riseiCart");
+document.getElementById("orderForm")
+.addEventListener("submit", function(){
 
     setTimeout(function(){
         window.location.href = "thanks.html";
-    }, 800);
+    }, 3000);
 
 });
 
