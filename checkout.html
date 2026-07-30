@@ -305,6 +305,10 @@ type="hidden"
 id="orderData"
 name="entry.759961625">
 
+<input
+type="hidden"
+id="paymentTotal"
+name="entry.882951761">
 
 <div class="form-group">
 
@@ -561,6 +565,8 @@ orderText +
 総合計：${(total + shipping).toLocaleString()}円
 `;
 
+document.getElementById("paymentTotal").value =
+total + shipping;
 }
 // 送料変更などの処理
 updateOrderData();
